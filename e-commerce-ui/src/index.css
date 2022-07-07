@@ -1,0 +1,10 @@
+/* Landing page body */
+#img2 {
+    width: 100%;
+    height: 590px !important;
+  }
+
+  #signupMain {
+    height: 100vh;
+    width: 100% !important;
+}
