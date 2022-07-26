@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { Delete } from "@mui/icons-material"
 import axios from "axios"
 const Admindashboard = () => {
     const [name, setName] = useState("")
@@ -14,6 +15,7 @@ const Admindashboard = () => {
     const [files, setfiles] = useState("")
     const [description, setdescription] = useState("")
     const [price, setprice] = useState("")
+    const [productName, setproductName] = useState("")
     const pickFile = (e) => {
         const file = e.target.files[0]
         const reader = new FileReader()
@@ -25,7 +27,7 @@ const Admindashboard = () => {
 
     }
     const uploadProducts = () => {
-        const productsData = { files, description, price }
+        const productsData = { files, description, price, productName }
         console.log(productsData);
         // const productsDesc = { posts }
         // const productPrice = { price }
@@ -33,9 +35,9 @@ const Admindashboard = () => {
             console.log(res);
         })
     }
-    const [del, setDel] = useState("")
-    const deleteProducts = () => {
-        axios.post(url3, del).then((res)=>{
+    // const [del, setDel] = useState("")
+    const deleteProducts = (i) => {
+        axios.post(url3, i).then((res) => {
             console.log(res, 33);
         })
     }
@@ -87,9 +89,14 @@ const Admindashboard = () => {
             <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
+
                         <div className="modal-body">
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                             <p>Product image</p>
                             <input type="file" name="" id="" onChange={(e) => pickFile(e)} />
+                            <p>Product name</p>
+                            <input type="text" onChange={(e) => setproductName(e.target.value)} />
                             <p>Product description</p>
                             <textarea name="posts" rows="4" cols="50" className="form-control" onChange={(e) => setdescription(e.target.value)}>
 
@@ -107,11 +114,12 @@ const Admindashboard = () => {
 
             <main className={""} style={{ width: "100%", display: "flex", flexWrap: "wrap" }} id={"wole1"}>
                 {display.map((i, wole) => (
-                    <div key={wole} className="card card-body m-3 shadow bg-dark text-light w-25" style={{ width: "20%" }}>
-                        <img src={i.products} alt="" />
-                        <p>Description: {i.description}</p>
+                    <div key={wole} className="card card-body m-3 shadow bg-dark text-light" style={{ width: "200px" }}>
+                        <img src={i.products} alt="" style={{ width: "100%", height: "150px" }} />
+                        <p>Name:{i.productName}</p>
+                        <p>Desc: {i.description}</p>
                         <p>Price: {i.price}</p>
-                        <button className="btn btn-danger" onClick= {()=>setDel(i), deleteProducts}>Delete</button>
+                        <button className="btn btn-danger w-25" onClick={() => deleteProducts(i)}><Delete /></button>
                     </div>
                 )
                 )}

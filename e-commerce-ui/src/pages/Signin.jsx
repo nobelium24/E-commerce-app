@@ -89,7 +89,7 @@ const SignIn = () => {
                                     </div>
 
 
-                                    <button type="submit" className="btn btn-primary btn-block mb-4" type="submit">
+                                    <button type="submit" className="btn btn-primary btn-block mb-4">
                                         Sign In
                                     </button>
 

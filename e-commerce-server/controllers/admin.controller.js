@@ -67,8 +67,8 @@ const uploadProducts = (req, res) => {
         else {
             console.log(result.secure_url);
             res.send({ message: "Upload successful", image: result.secure_url })
-            const products = new productsModel({ products: result.secure_url, description:req.body.description, price:req.body.price})
-            productsModel.find((err, res) => {
+            const products = new productsModel({ products: result.secure_url, description:req.body.description, price:req.body.price, productName:req.body.productName})
+            productsModel.find((err, result) => {
                 if (err) {
                     console.log(err, "Upload failed");
                 }
@@ -79,7 +79,7 @@ const uploadProducts = (req, res) => {
                             console.log(err, "Fail");
                         }
                         else{
-                            console.log(res, "Success");
+                            console.log(result, "Success");
                         }
                     })
                 }
@@ -96,7 +96,8 @@ const displayProducts = (req, res) => {
 }
 
 const handleDelete = (req, res) => {
-    let myIndex = req.body.ind
+    let myIndex = req.body
+    console.log(myIndex)
     productsModel.deleteOne({_id:myIndex}, (err, result)=>{
         if (err) {
             console.log("Delete failed");

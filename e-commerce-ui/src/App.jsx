@@ -7,6 +7,7 @@ import SignUp from "./pages/Signup"
 import UserDashboard from "./pages/UserDashboard"
 import Admindashboard from "./pages/Admindashboard"
 import Notfound from "./pages/Notfound"
+import Cart from "./pages/Cart"
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
                 <Route path="/adminsignup" element={<Adminsignup/>} />
                 <Route path="/adminsignin" element={<Adminsignin/>} />
                 <Route path={"/admindashboard"} element={<Admindashboard/>} />
+                <Route path={"/cart"} element={<Cart />} />
                 <Route path="*" element={<Notfound />} />
             </Routes>
         </>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import { Toc } from "@mui/icons-material"
+import { ShoppingCart } from "@mui/icons-material"
 const UserDashboard = () => {
     const [name, setName] = useState("")
     useEffect(() => {
@@ -9,20 +11,37 @@ const UserDashboard = () => {
         }
     }, [])
     const url2 = "http://localhost:3700/admin/getproducts"
+    const url3 = "http://localhost:3700/users/postcart"
     const [display, setdisplay] = useState([])
     const [toCart, setToCart] = useState("")
+    const [quantity, setQuantity] = useState("")
     useEffect(() => {
         axios.get(url2).then((res) => {
-            let result = res 
-            setdisplay(result.data) 
+            let result = res
+            setdisplay(result.data)
             // console.log(result);
         })
-        
-    }, [])
-    console.log(toCart);
-   
 
-   
+    }, [])
+    // console.log(toCart.productName, toCart.price, toCart.description, toCart._id, quantity );
+
+    // console.log(toCart);
+
+    const getCart = (product) => {
+        let productName = product.productName
+        let price = product.price
+        let description = product.description
+        let p_id = product._id
+        let pImg = product.products
+        let newCart = { productName, price, description, p_id, pImg, quantity }
+        console.log(newCart);
+        axios.post(url3, newCart).then((res) => {
+            console.log(res);
+        })
+    }
+
+
+
 
     return (
         <>
@@ -37,11 +56,14 @@ const UserDashboard = () => {
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item text-light">
+                        <ul className="navbar-nav d-flex align-items-center justify-content-around w-25 me-auto mb-2 mb-lg-0">
+                            <li className="nav-item text-white">
                                 <a className="nav-link">Welcome {name.firstname}</a>
                             </li>
-                            <li className="nav-item text-light">
+                            <li>
+                                <Link to="/cart"><ShoppingCart className="text-white" /></Link>
+                            </li>
+                            <li className="nav-item text-white">
                                 <Link className="nav-link" to={"/"}>Log Out</Link>
                             </li>
                         </ul>
@@ -49,17 +71,24 @@ const UserDashboard = () => {
                     </div>
                 </div>
             </nav>
-            <main className={""} style={{ width: "100%", display: "flex", flexWrap: "wrap" }} id={"wole1"}>
-                {display.map((i, wole) => (
-                    <div key={wole} className="card card-body m-3 shadow bg-dark text-light" style={{ width: "20%" }}>
-                        <img src={i.products} alt="" />
-                        <p>Description: {i.description}</p>
-                        <p>Price: {i.price}</p>
-                        <div>
+            <main className={"container-fluid"} style={{ width: "100%", display: "flex", flexWrap: "wrap" }} id={"wole1"}>
+                {display.map((product, wole) => (
+                    <div key={wole} className="card card-body m-3 shadow bg-dark text-light" style={{ width: "200px", minWidth: "" }}>
+                        <img src={product.products} alt="" />
+                        <p>Name:{product.productName}</p>
+                        <p>Description: {product.description}</p>
+                        <p>Price: {product.price}</p>
+                        {/* <p>Sub-total: {product.price*quantity}</p> */}
+                        <div className="w-100">
                             <p>Quantity</p>
-                            <input type="number" className="form-control" />
+                            <div className="w-100 d-flex">
+                                <input type="number" className="form-control w-25 mx-2" onChange={(e) => setQuantity(e.target.value)} />
+                                {/* <button className="btn btn-primary w-50" onClick={() => setToCart(i)}>Buy</button> */}
+                                <button className="btn btn-primary w-50" onClick={() => getCart(product)}>Buy</button>
+                            </div>
                         </div>
-                        <button className="btn btn-primary w-50" onClick={()=>setToCart(i)}>Buy</button>
+
+
                     </div>
                 )
                 )}

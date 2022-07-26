@@ -1,4 +1,5 @@
 const userModel = require("../models/user.model")
+const cartModel = require("../models/cart.model")
 
 
 const registerUser = (req, res) => {
@@ -25,22 +26,61 @@ const registerUser = (req, res) => {
 }
 
 const signIn = (req, res) => {
-    userModel.find({email:req.body.email, password:req.body.password}, (err, result)=>{
+    userModel.find({ email: req.body.email, password: req.body.password }, (err, result) => {
         if (err) {
             console.log(err);
-            res.send({message:"Server Error, please hold on", status:false})
+            res.send({ message: "Server Error, please hold on", status: false })
         }
-        else{
+        else {
             if (result.length > 0) {
                 console.log(result);
                 console.log("login successful", result[0]);
-                res.send({message:"Welcome", status:true, result:result[0]})
+                res.send({ message: "Welcome", status: true, result: result[0] })
             }
-            else{
-                res.send({message:"Invalid Email or password", status:false})
+            else {
+                res.send({ message: "Invalid Email or password", status: false })
             }
         }
     })
 }
 
-module.exports = {registerUser, signIn}
+const toCart = (req, res) => {
+    let product = req.body
+    const cart = new cartModel({ productName: product.productName, description: product.description, price: product.price, quantity: product.quantity, image: product.pImg })
+    cartModel.find((err, result) => {
+        if (err) {
+            console.log(err, "Error");
+        } else {
+            cart.save((error) => {
+                if (error) {
+                    console.log(error, "fail");
+                } else {
+                    console.log(result, "Success");
+                }
+            })
+        }
+    })
+}
+
+const displayCart = (req, res) => {
+    cartModel.find((err, result) => {
+        res.send(result)
+    })
+}
+
+const handleDelete = (req, res) => {
+    let myIndex = req.body
+    console.log(myIndex)
+    cartModel.deleteOne({_id:myIndex}, (err, result)=>{
+        if (err) {
+            console.log("Delete failed");
+        }
+        else{
+            console.log("delete successful", result);
+            
+
+        }
+    })
+}
+
+module.exports = { registerUser, signIn, toCart, displayCart, handleDelete }
