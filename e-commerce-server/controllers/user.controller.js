@@ -46,7 +46,7 @@ const signIn = (req, res) => {
 
 const toCart = (req, res) => {
     let product = req.body
-    const cart = new cartModel({ productName: product.productName, description: product.description, price: product.price, quantity: product.quantity, image: product.pImg })
+    const cart = new cartModel({ productName: product.productName, description: product.description, price: product.price, quantity: product.quantity, image: product.pImg, subTotal: product.subTotal })
     cartModel.find((err, result) => {
         if (err) {
             console.log(err, "Error");

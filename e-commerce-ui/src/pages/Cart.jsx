@@ -5,7 +5,8 @@ import { Delete } from "@mui/icons-material"
 const Cart = () => {
     const [name, setName] = useState("")
     const [display, setDisplay] = useState([])
-    
+    const [total, setTotal] = useState("")
+
     useEffect(() => {
         if (localStorage.userDetails) {
             setName(JSON.parse(localStorage.userDetails))
@@ -18,6 +19,13 @@ const Cart = () => {
         axios.get(url).then((res) => {
             console.log(res);
             setDisplay(res.data)
+
+            const sum = res.data.reduce((accumulator, object) => {
+                return Number(accumulator) + Number(object.subTotal);
+            }, 0);
+            console.log(sum);
+            setTotal(sum)
+
         })
     }, [])
     let sub
@@ -26,7 +34,9 @@ const Cart = () => {
             console.log(res, 33);
         })
     }
-     
+
+
+
 
     return (
         <>
@@ -57,25 +67,28 @@ const Cart = () => {
                 </div>
             </nav>
 
-            <main className="w-75 container-fluid d-flex flex-column justify-content-center align-items-center">
-                {display.map((i, wole) => (
-                    <div key={wole} className="w-50 card shadow bg-dark text-light d-flex flex-column justify-content-center align-items-center my-2 py-3">
-                        
-                        <img src={i.image} alt="" className="w-50" />
-                        <h5>Product Name: {i.productName}</h5>
-                        <h5>Description: {i.description}</h5>
-                        <h5>Price: {i.price}</h5>
-                        <h5>Sub-total: {sub=i.price*i.quantity}</h5>
-                        <button className="btn btn-danger w-25" onClick={() => deleteProducts(i)}><Delete />Remove</button>
-                        {/* {i.reduce((accumulator, object)=>(
-                        <h1>{accumulator + object.price}</h1>
-                       ))} */}
-                    </div>
-                ))}
-            </main>
-            <div className="w-25">
-                <button className="btn btn-success" onClick={()=>console.log(sub)}>Checkout</button>
-            </div>
+            <section className="w-100 container d-flex flex-row">
+                <main className="w-75 container d-flex flex-column justify-content-center align-items-center">
+                    {display.map((i, wole) => (
+                        <div key={wole} className="w-75 card shadow bg-dark text-light d-flex flex-column justify-content-center align-items-center my-2 py-3">
+
+                            <img src={i.image} alt="" className="w-50" style={{height:"200px"}} />
+                            <h5>Product Name: {i.productName}</h5>
+                            {/* <h5>Description: {i.description}</h5> */}
+                            {/* <h5>Price: {i.price}</h5> */}
+                            <h5>Sub-total: {sub = i.price * i.quantity}</h5>
+                            <button className="btn btn-danger w-25" onClick={() => deleteProducts(i)}><Delete />Remove</button>
+                        </div>
+                    ))}
+
+                </main>
+                <div className="card w-25 m-5 p-3 bg-dark text-light" style={{height:"150px"}}>
+                    <h5>Cart Summary</h5>
+                    <p>Sub-total: {total}</p>
+                    <button className="btn btn-success">Checkout {total}</button>
+                </div>
+            </section>
+
         </>
     )
 }

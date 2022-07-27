@@ -4,7 +4,8 @@ const cartSchema = mongoose.Schema({
     description:String, 
     price:String, 
     quantity:String,
-    image:String
+    image:String, 
+    subTotal:String
 })
 const cartModel = mongoose.model("cart_tb", cartSchema)
 module.exports=cartModel

@@ -33,8 +33,9 @@ const UserDashboard = () => {
         let description = product.description
         let p_id = product._id
         let pImg = product.products
-        let newCart = { productName, price, description, p_id, pImg, quantity }
-        console.log(newCart);
+        let subTotal = Number(price) * Number(quantity)
+        let newCart = { productName, price, description, p_id, pImg, quantity, subTotal }
+        console.log(newCart, subTotal);
         axios.post(url3, newCart).then((res) => {
             console.log(res);
         })
