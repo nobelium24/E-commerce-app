@@ -6,28 +6,31 @@ const Cart = () => {
     const [name, setName] = useState("")
     const [display, setDisplay] = useState([])
     const [total, setTotal] = useState("")
+    const url = "http://localhost:3700/users/getcart"
+    const url2 = "http://localhost:3700/users/deletecart"
 
     useEffect(() => {
         if (localStorage.userDetails) {
+            const something=JSON.parse(localStorage.userDetails)
             setName(JSON.parse(localStorage.userDetails))
+            axios.post(url,{email:something.email}).then((res) => {
+    
+                console.log(res);
+                setDisplay(res.data)
+    
+                const sum = res.data.reduce((accumulator, object) => {
+                    return Number(accumulator) + Number(object.subTotal);
+                }, 0);
+                console.log(sum);
+                setTotal(sum)
+    
+            })
         }
+        setName(JSON.parse(localStorage.userDetails))
     }, [])
 
-    const url = "http://localhost:3700/users/getcart"
-    const url2 = "http://localhost:3700/users/deletecart"
-    useEffect(() => {
-        axios.get(url).then((res) => {
-            console.log(res);
-            setDisplay(res.data)
-
-            const sum = res.data.reduce((accumulator, object) => {
-                return Number(accumulator) + Number(object.subTotal);
-            }, 0);
-            console.log(sum);
-            setTotal(sum)
-
-        })
-    }, [])
+  
+  
     let sub
     const deleteProducts = (i) => {
         axios.post(url2, i).then((res) => {

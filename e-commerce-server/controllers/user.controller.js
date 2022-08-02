@@ -46,7 +46,16 @@ const signIn = (req, res) => {
 
 const toCart = (req, res) => {
     let product = req.body
-    const cart = new cartModel({ productName: product.productName, description: product.description, price: product.price, quantity: product.quantity, image: product.pImg, subTotal: product.subTotal })
+    const cart = new cartModel({ 
+        productName: product.productName, 
+        description: product.description, 
+        price: product.price, 
+        quantity: product.quantity, 
+        image: product.pImg, 
+        subTotal: product.subTotal,
+        email:product.email
+    })
+    console.log(cart);
     cartModel.find((err, result) => {
         if (err) {
             console.log(err, "Error");
@@ -63,21 +72,23 @@ const toCart = (req, res) => {
 }
 
 const displayCart = (req, res) => {
-    cartModel.find((err, result) => {
+    console.log(req.body.email)
+    cartModel.find({email:req.body.email}, (err, result) => {
         res.send(result)
+        // console.log(result);
     })
 }
 
 const handleDelete = (req, res) => {
     let myIndex = req.body
     console.log(myIndex)
-    cartModel.deleteOne({_id:myIndex}, (err, result)=>{
+    cartModel.deleteOne({ _id: myIndex }, (err, result) => {
         if (err) {
             console.log("Delete failed");
         }
-        else{
+        else {
             console.log("delete successful", result);
-            
+
 
         }
     })
