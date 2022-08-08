@@ -6,6 +6,6 @@ router.post("/signin", userController.signIn)
 router.post("/postcart", userController.toCart)
 router.post("/getcart", userController.displayCart)
 router.post("/deletecart", userController.handleDelete)
-
-
+router.post("/clearcart", userController.clearCart)
+router.get("/dashcheck", userController.dashCheck)
 module.exports = router

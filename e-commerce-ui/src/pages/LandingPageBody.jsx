@@ -41,10 +41,10 @@ const LandingPageBody = () => {
                 </div>
 
             </div>
-            <main className={""} style={{ width: "100%", display: "flex", flexWrap: "wrap" }} id={"wole1"}>
+            <main className={""} style={{display: "flex", flexWrap: "wrap" }} id={"wole1"}>
                 {display.map((i, wole) => (
-                    <div key={wole} className="card card-body m-3 shadow bg-dark text-light" style={{ width: "20%" }}>
-                        <img src={i.products} alt="" />
+                    <div key={wole} className="card card-body m-3 shadow bg-dark text-light" style={{ width: "200px" }}>
+                        <img src={i.products} alt="" style={{width:"200px", height:"100px"}} />
                         <p>Description: {i.description}</p>
                         <p>Price: {i.price}</p>
                         <Link className="btn btn-primary w-50" to="/signp">Buy</Link>

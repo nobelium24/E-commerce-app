@@ -95,14 +95,14 @@ const Admindashboard = () => {
 
                             <p>Product image</p>
                             <input type="file" name="" id="" onChange={(e) => pickFile(e)} />
-                            <p>Product name</p>
-                            <input type="text" onChange={(e) => setproductName(e.target.value)} />
-                            <p>Product description</p>
-                            <textarea name="posts" rows="4" cols="50" className="form-control" onChange={(e) => setdescription(e.target.value)}>
+                            
+                            <input type="text" onChange={(e) => setproductName(e.target.value)} placeholder="Product Name" className="my-3" />
+                           
+                            <textarea placeholder="Product Description" name="posts" rows="4" cols="50" className="form-control my-3" onChange={(e) => setdescription(e.target.value)}>
 
                             </textarea>
-                            <p>Product price</p>
-                            <input type="text" onChange={(e) => setprice(e.target.value)} />
+                          
+                            <input type="text" onChange={(e) => setprice(e.target.value)} placeholder="Product Price" className="my-3"  />
 
                         </div>
                         <div className="modal-footer">
@@ -116,7 +116,7 @@ const Admindashboard = () => {
                 {display.map((i, wole) => (
                     <div key={wole} className="card card-body m-3 shadow bg-dark text-light" style={{ width: "200px" }}>
                         <img src={i.products} alt="" style={{ width: "100%", height: "150px" }} />
-                        <p>Name:{i.productName}</p>
+                        <p>Name: {i.productName}</p>
                         <p>Desc: {i.description}</p>
                         <p>Price: {i.price}</p>
                         <button className="btn btn-danger w-25" onClick={() => deleteProducts(i)}><Delete /></button>

@@ -20,7 +20,7 @@ const SignUp = () => {
 
         },
         onSubmit: (values) => {
-            console.log(values);
+            // console.log(values);
             const newUser = values
             axios.post(url, newUser).then((res)=>{
                 console.log(res);

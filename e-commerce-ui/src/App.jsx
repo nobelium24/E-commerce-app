@@ -8,6 +8,7 @@ import UserDashboard from "./pages/UserDashboard"
 import Admindashboard from "./pages/Admindashboard"
 import Notfound from "./pages/Notfound"
 import Cart from "./pages/Cart"
+import Checkout from "./pages/Checkout"
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
                 <Route path={"/admindashboard"} element={<Admindashboard/>} />
                 <Route path={"/cart"} element={<Cart />} />
                 <Route path="*" element={<Notfound />} />
+                <Route path="/checkout" element={<Checkout/>} />
             </Routes>
         </>
     )

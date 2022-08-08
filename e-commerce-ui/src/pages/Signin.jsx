@@ -27,15 +27,19 @@ const SignIn = () => {
                 setUserResult(res.data.result)
 
 
-                if (res.data.status === true) {
-                    localStorage.userDetails = JSON.stringify(res.data.result)
+                if (res.data.status) {
+                    // console.log(res.data.result);
                     navigate("/dashboard")
+                    localStorage.userDetails = JSON.stringify(res.data.result)
+                    localStorage.token = JSON.stringify(res.data.token)
+
 
                 }
-                else {
+                else if(status === false) {
                     alert("Invalid email or password")
                 }
-                // {status==true? navigate("/users"): alert("Error")}
+
+                // {status ? navigate("/dashboard") : () => alert(33)}
             })
         },
         validationSchema: yup.object({
