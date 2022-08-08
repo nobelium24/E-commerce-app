@@ -22,9 +22,10 @@ const UserDashboard = () => {
         axios.get(url2,
             {
                 headers: {
-                    "authorization": `Bearer ${token}`,
+                    "authorization": `Bearer`,
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    token:token
                 }
             }
         ).then((res) => {

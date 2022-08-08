@@ -81,11 +81,12 @@ const signIn = (req, res) => {
 }
 const dashCheck = (request, response) => {
     const auth = request.headers.authorization
-    const token = auth.split(' ')[1]
+    // const token = auth.split(' ')[1]
+    const token = request.token
     console.log(token)
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-            console.log(`jwt could not be decoded`)
+            console.log(err.message)
             response.send({ message: err.message })
         }
 
