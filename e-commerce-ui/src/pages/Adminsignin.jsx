@@ -29,6 +29,9 @@ const Adminsignin = () => {
 
                 if (res.data.status === true) {
                     localStorage.adminDetails = JSON.stringify(res.data.result)
+                    localStorage.adminToken = JSON.stringify(res.data.token)
+                    // console.log(res.data.token)
+
                     navigate("/admindashboard")
                     
                 }

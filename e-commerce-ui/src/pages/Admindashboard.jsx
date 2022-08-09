@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Delete } from "@mui/icons-material"
 import axios from "axios"
 const Admindashboard = () => {
+    const navigate = useNavigate()
     const [name, setName] = useState("")
+    const token = JSON.parse(localStorage.adminToken)
     useEffect(() => {
         if (localStorage.adminDetails) {
             setName(JSON.parse(localStorage.adminDetails))
@@ -12,6 +14,7 @@ const Admindashboard = () => {
     const url = "http://localhost:3700/admin/postproducts"
     const url2 = "http://localhost:3700/admin/getproducts"
     const url3 = "http://localhost:3700/admin/delete"
+    const url4 = "http://localhost:3700/admin/dashcheck"
     const [files, setfiles] = useState("")
     const [description, setdescription] = useState("")
     const [price, setprice] = useState("")
@@ -43,13 +46,34 @@ const Admindashboard = () => {
     }
     const [display, setdisplay] = useState([])
     useEffect(() => {
-        axios.get(url2).then((res) => {
-            // console.log(res);
-            // console.log(res.data)
+        axios.get(url2,
+            {
+                headers: {
+                    "authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+            }
+        ).then((res) => {
             let result = res
-            // console.log(result.data)
             setdisplay(result.data)
-            // console.log(display);
+            axios.get(url4,
+                {
+                    headers: {
+                        "authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    }
+                }).then((res) => {
+                    console.log(res.data);
+                    if (res.data.message == "verification successful") {
+
+                    }
+                    else {
+                        navigate("/")
+                    }
+                })
+
         }).catch((err) => {
             console.log(err);
         })
@@ -95,14 +119,14 @@ const Admindashboard = () => {
 
                             <p>Product image</p>
                             <input type="file" name="" id="" onChange={(e) => pickFile(e)} />
-                            
+
                             <input type="text" onChange={(e) => setproductName(e.target.value)} placeholder="Product Name" className="my-3" />
-                           
+
                             <textarea placeholder="Product Description" name="posts" rows="4" cols="50" className="form-control my-3" onChange={(e) => setdescription(e.target.value)}>
 
                             </textarea>
-                          
-                            <input type="text" onChange={(e) => setprice(e.target.value)} placeholder="Product Price" className="my-3"  />
+
+                            <input type="text" onChange={(e) => setprice(e.target.value)} placeholder="Product Price" className="my-3" />
 
                         </div>
                         <div className="modal-footer">

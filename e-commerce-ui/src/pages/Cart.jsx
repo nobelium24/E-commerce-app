@@ -18,13 +18,13 @@ const Cart = () => {
             setName(JSON.parse(localStorage.userDetails))
             axios.post(url, { email: something.email }).then((res) => {
 
-                console.log(res);
+                // console.log(res);
                 setDisplay(res.data)
 
                 const sum = res.data.reduce((accumulator, object) => {
                     return Number(accumulator) + Number(object.subTotal);
                 }, 0);
-                console.log(sum);
+                // console.log(sum);
                 setTotal(sum)
 
             })
@@ -35,14 +35,14 @@ const Cart = () => {
     let sub
     const deleteProducts = (i) => {
         axios.post(url2, i).then((res) => {
-            console.log(res);
+            // console.log(res);
         })
     }
     const something = JSON.parse(localStorage.userDetails)
     let payCart = something.email
     const checkOut = () => {
         axios.post(url3,{email:payCart} ).then((res)=>{
-            console.log(res);
+            // console.log(res);
         })
        
     }
@@ -53,7 +53,7 @@ const Cart = () => {
         reference: (new Date()).getTime().toString(),
         email: name.email,
         amount: total*100,
-        publicKey: "pk_test_69cdd0e7b5d321f04bd3a73c423d3990ac69a5c4",
+        publicKey: `${process.env.REACT_APP_PUBLIC_KEY}`,
     };
 
     const handlePaystackSuccessAction = (reference) => {

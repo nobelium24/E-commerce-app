@@ -19,7 +19,7 @@ const Checkout = () => {
         reference: (new Date()).getTime().toString(),
         email: name.email,
         amount: total,
-        publicKey: "pk_test_69cdd0e7b5d321f04bd3a73c423d3990ac69a5c4",
+        publicKey: "",
     };
 
     const handlePaystackSuccessAction = (reference) => {

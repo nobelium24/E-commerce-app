@@ -6,7 +6,7 @@ import { ShoppingCart } from "@mui/icons-material"
 const UserDashboard = () => {
     const navigate = useNavigate()
     const [name, setName] = useState("")
-    const token = localStorage.token
+    const token = JSON.parse(localStorage.token)
     useEffect(() => {
         if (localStorage.userDetails) {
             setName(JSON.parse(localStorage.userDetails))
@@ -22,10 +22,9 @@ const UserDashboard = () => {
         axios.get(url2,
             {
                 headers: {
-                    "authorization": `Bearer`,
+                    "authorization": `Bearer ${token}`,
                     "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    token:token
+                    "Accept": "application/json"
                 }
             }
         ).then((res) => {
@@ -34,13 +33,21 @@ const UserDashboard = () => {
             // setdisplay(result.data)
             setdisplay(result.data)
 
-            console.log(result);
+            // console.log(result);
             axios.get(url4,
                 {
                     headers: {
                         "authorization": `Bearer ${token}`,
                         "Content-Type": "application/json",
-                        "Accept": "application/json"
+                        "Accept": "application/json",
+                    }
+                }).then((response) => {
+                    console.log(response.data)
+                    if (response.data.message == "verification successful") {
+
+                    }
+                    else {
+                        navigate('/signin')
                     }
                 })
         })

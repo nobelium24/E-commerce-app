@@ -62,7 +62,7 @@ const signIn = (req, res) => {
                         console.log("Success");
                         jwt.sign({ email }, SECRET, (err, token) => {
                             if (token) {
-                                console.log(`token: ${token}`)
+                                // console.log(`token: ${token}`)
                                 res.send({ token: token, message: "welcome", status: "true", result: { firstname: user.firstname, email: user.email, lastname: user.lastname } })
                             }
                             else { res.send({ message: "error", status: false }) }
@@ -71,7 +71,7 @@ const signIn = (req, res) => {
 
                     }
                     else if (same == false) {
-                        res.send({ message: "Invalid log in details", status: "false", })
+                        res.send({ message: "Invalid log in details", status: "false" })
                         console.log("Fail")
                     }
                 })
@@ -81,19 +81,19 @@ const signIn = (req, res) => {
 }
 const dashCheck = (request, response) => {
     const auth = request.headers.authorization
-    // const token = auth.split(' ')[1]
-    const token = request.token
+    const token = auth.split(' ')[1]
+    // console.log(request.headers.authorization)
+    // const token = request.token
     console.log(token)
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             console.log(err.message)
-            response.send({ message: err.message })
+            response.send({ message:"failed" })
         }
 
         else {
-            console.log(decoded.username)
-
-            response.send({ message: 'verification successful', username: decoded.username })
+            console.log(decoded.email)
+            response.send({ message: 'verification successful', email: decoded.email })
         }
     })
 }
