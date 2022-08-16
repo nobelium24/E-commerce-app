@@ -43,7 +43,7 @@ const SignUp = () => {
 
             <section className="text-center">
 
-                <div className="p-5 bg-image" style={{
+                <div className="p-5 bg-dark" style={{
                     backgroundImage: { image },
                     height: "300px"
                 }}></div>
@@ -56,7 +56,7 @@ const SignUp = () => {
                 }}>
                     <div className="card-body py-5 px-md-5">
 
-                        <div className="row d-flex justify-content-center">
+                        <div className="row d-flex justify-content-center shadow-lg">
                             <div className="col-lg-8">
                                 <h2 className="fw-bold mb-5">Sign up</h2>
                                 {status ? <div className="alert alert-success">{message}</div> : <div className="alert alert-danger">{message}</div>}

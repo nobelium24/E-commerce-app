@@ -11,7 +11,7 @@ const LandingPage = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse w-75" id="navbarSupportedContent">
-                        <form className="d-flex w-75">
+                        <form className="d-flex w-75" id="navForm">
                             <input className="form-control me-2 w-100" type="search" placeholder="Search" aria-label="Search" />
                             <button className ="btn btn-outline-success" type ="submit">Search</button>
                         </form>
@@ -19,7 +19,7 @@ const LandingPage = () => {
                             <a className="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 My Account
                             </a>
-                            <ul className="dropdown-menu text-light" aria-labelledby="navbarDropdown">
+                            <ul className="dropdown-menu text-light" aria-labelledby="navbarDropdown" >
                                 <li><Link className="dropdown-item" to="/signup">Sign Up</Link></li>
                                 <li><Link className="dropdown-item" to="/signin">Sign In</Link></li>
                             </ul>
