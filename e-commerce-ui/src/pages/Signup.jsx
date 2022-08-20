@@ -9,7 +9,7 @@ const SignUp = () => {
     const [message, setmessage] = useState("")
     const [status, setstatus] = useState("")
     const navigate = useNavigate()
-    const url = "http://localhost:3700/users/signup"
+    const url = "https://nobelium-store.herokuapp.com/users/signup"
 
     const formik = useFormik({
         initialValues: {

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 const LandingPageBody = () => {
     
-    const url2 = "http://localhost:3700/admin/getproducts"
+    const url2 = "https://nobelium-store.herokuapp.com/admin/getproducts"
     const [display, setdisplay] = useState([])
     useEffect(() => {
         axios.get(url2).then((res) => {
@@ -47,7 +47,7 @@ const LandingPageBody = () => {
                         <img src={i.products} alt="" style={{width:"200px", height:"100px"}} />
                         <p>Description: {i.description}</p>
                         <p>Price: {i.price}</p>
-                        <Link className="btn btn-primary w-50" to="/signp">Buy</Link>
+                        <Link className="btn btn-primary w-50" to="/signup">Buy</Link>
                     </div>
                 )
                 )}

@@ -8,7 +8,7 @@ const Adminsignup = () => {
     const navigate = useNavigate()
     const [status, setstatus] = useState("")
     const [message, setmessage] = useState("")
-    const url = "http://localhost:3700/admin/signup"
+    const url = "https://nobelium-store.herokuapp.com/admin/signup"
 
     const formik = useFormik({
         initialValues: {

@@ -11,10 +11,10 @@ const Admindashboard = () => {
             setName(JSON.parse(localStorage.adminDetails))
         }
     }, [])
-    const url = "http://localhost:3700/admin/postproducts"
-    const url2 = "http://localhost:3700/admin/getproducts"
-    const url3 = "http://localhost:3700/admin/delete"
-    const url4 = "http://localhost:3700/admin/dashcheck"
+    const url = "https://nobelium-store.herokuapp.com/admin/postproducts"
+    const url2 = "https://nobelium-store.herokuapp.com/admin/getproducts"
+    const url3 = "https://nobelium-store.herokuapp.com/admin/delete"
+    const url4 = "https://nobelium-store.herokuapp.com/admin/dashcheck"
     const [files, setfiles] = useState("")
     const [description, setdescription] = useState("")
     const [price, setprice] = useState("")

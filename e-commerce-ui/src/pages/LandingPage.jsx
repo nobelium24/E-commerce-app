@@ -1,7 +1,33 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import {useEffect} from 'react'
 import LandingPageBody from "./LandingPageBody"
-
+import axios from 'axios'
 const LandingPage = () => {
+    const navigate = useNavigate()
+    const url4 = "https://nobelium-store.herokuapp.com/users/dashcheck"
+    useEffect(() => {
+        if (localStorage.token) {
+            const token = JSON.parse(localStorage.token)
+            axios.get(url4,
+                {
+                    headers: {
+                        "authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    }
+                }).then((response) => {
+                    console.log(response.data)
+                    if (response.data.message == "verification successful") {
+                        navigate('/dashboard')
+                    }
+                    else {
+                       
+                    }
+                }).catch(err=>console.log(err.message))
+                
+            }
+        }, [])
+    
     return (
         <>
             <nav className="navbar navbar-expand-md navbar-light bg-dark text-light">

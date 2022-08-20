@@ -24,4 +24,17 @@
   #img2{
     height: 300px !important;
   }
+  #cartSection{
+    flex-direction: column !important;
+  }
+  #cartSectionDiv{
+    width: 100% !important;
+  }
+  #delPara{
+    display: none !important;
+  }
+  #cartSectionDiv2{
+    width: 70% !important;
+    height: fit-content !important;
+  }
 }

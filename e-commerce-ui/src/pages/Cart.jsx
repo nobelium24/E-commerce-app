@@ -8,9 +8,9 @@ const Cart = () => {
     const [name, setName] = useState("")
     const [display, setDisplay] = useState([])
     const [total, setTotal] = useState("")
-    const url = "http://localhost:3700/users/getcart"
-    const url2 = "http://localhost:3700/users/deletecart"
-    const url3 = "http://localhost:3700/users/clearcart"
+    const url = "https://nobelium-store.herokuapp.com/users/getcart"
+    const url2 = "https://nobelium-store.herokuapp.com/users/deletecart"
+    const url3 = "https://nobelium-store.herokuapp.com/users/clearcart"
     const navigate = useNavigate()
     useEffect(() => {
         if (localStorage.userDetails) {
@@ -37,6 +37,7 @@ const Cart = () => {
         axios.post(url2, i).then((res) => {
             // console.log(res);
         })
+        window.location.reload()
     }
     const something = JSON.parse(localStorage.userDetails)
     let payCart = something.email
@@ -74,6 +75,8 @@ const Cart = () => {
     };
 
 
+
+
     return (
         <>
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
@@ -103,8 +106,8 @@ const Cart = () => {
                 </div>
             </nav>
 
-            <section className="w-100 container d-flex flex-row">
-                <main className="w-75 container d-flex flex-column justify-content-center align-items-center">
+            <section className="w-100 container-fluid d-flex flex-row" id="cartSection">
+                <main className="w-75 container d-flex flex-column justify-content-center align-items-center" id="cartSectionDiv">
                     {display.map((i, wole) => (
                         <div key={wole} className="w-75 card shadow bg-dark text-light d-flex flex-column justify-content-center align-items-center my-2 py-3">
 
@@ -113,12 +116,12 @@ const Cart = () => {
                             {/* <h5>Description: {i.description}</h5> */}
                             {/* <h5>Price: {i.price}</h5> */}
                             <h5>Sub-total: {sub = i.price * i.quantity}</h5>
-                            <button className="btn btn-danger w-25" onClick={() => deleteProducts(i)}><Delete />Remove</button>
+                            <button className="btn btn-danger w-25" onClick={() => deleteProducts(i)}><Delete /><p id="delPara">Remove</p></button>
                         </div>
                     ))}
 
                 </main>
-                <div className="card w-25 m-5 p-3 bg-dark text-light" style={{ height: "150px" }}>
+                <div className="card w-25 m-5 p-3 bg-dark text-light" style={{ height: "150px" }} id="cartSectionDiv2">
                     <h5>Cart Summary</h5>
                     <p>Sub-total: {total}</p>
                     <PaystackButton {...componentProps} className="btn btn-success" onClick={checkOut} />

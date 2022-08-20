@@ -12,9 +12,9 @@ const UserDashboard = () => {
             setName(JSON.parse(localStorage.userDetails))
         }
     }, [])
-    const url2 = "http://localhost:3700/admin/getproducts"
-    const url3 = "http://localhost:3700/users/postcart"
-    const url4 = "http://localhost:3700/users/dashcheck"
+    const url2 = "https://nobelium-store.herokuapp.com/admin/getproducts"
+    const url3 = "https://nobelium-store.herokuapp.com/users/postcart"
+    const url4 = "https://nobelium-store.herokuapp.com/users/dashcheck"
     const [display, setdisplay] = useState([])
     const [toCart, setToCart] = useState("")
     const [quantity, setQuantity] = useState("")
@@ -59,23 +59,27 @@ const UserDashboard = () => {
 
     const getCart = (product) => {
 
-        // if (quantity == 0) {
-        //     quantity == 1
-        // }
-        let productName = product.productName
-        let price = product.price
-        let description = product.description
-        let p_id = product._id
-        let pImg = product.products
-        let email = name.email
+        if (quantity === "") {
+            alert("Please input quantity")
+        }
+        else {
+            let productName = product.productName
+            let price = product.price
+            let description = product.description
+            let p_id = product._id
+            let pImg = product.products
+            let email = name.email
 
-        let subTotal = Number(price) * Number(quantity)
-        let newCart = { productName, price, description, p_id, pImg, quantity, subTotal, email }
-        console.log(newCart, subTotal);
-        axios.post(url3, newCart).then((res) => {
-            console.log(res);
-        })
-        alert("Added to cart")
+            let subTotal = Number(price) * Number(quantity)
+            let newCart = { productName, price, description, p_id, pImg, quantity, subTotal, email }
+            console.log(newCart, subTotal);
+            axios.post(url3, newCart).then((res) => {
+                console.log(res);
+            })
+            alert("Added to cart")
+            navigate('/dashboard')
+        }
+
     }
 
 

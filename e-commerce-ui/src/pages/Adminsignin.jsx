@@ -6,7 +6,7 @@ import * as yup from "yup"
 
 const Adminsignin = () => {
     const navigate = useNavigate()
-    const url = "http://localhost:3700/admin/signin"
+    const url = "https://nobelium-store.herokuapp.com/admin/signin"
     const [status, setstatus] = useState("")
     const [message, setmessage] = useState("")
     const [userResult, setUserResult] = useState("")
