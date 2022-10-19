@@ -4,8 +4,10 @@ import duck3 from "../showcase6.jpeg"
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { height } from "@mui/system"
+import Sidenav from "./Sidenav"
 const LandingPageBody = () => {
-    
+
     const url2 = "https://nobelium-store.herokuapp.com/admin/getproducts"
     const [display, setdisplay] = useState([])
     useEffect(() => {
@@ -20,38 +22,36 @@ const LandingPageBody = () => {
     }, [])
     return (
         <>
-            <div id="div4" className="">
-                <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div className="carousel-inner" id="carouelInner">
-                        <div className="carousel-item active">
-                            <img src={duck} alt="" id="img2" className="d-block w-100" />
+            <div id="main">
+                <Sidenav/>
+                <div id="div4" className="">
+                    <div className="w-100 bg bg-dark" id="div2">
+                        <div id="subdiv1">
+                            <h1 className="display-4">
+                                Welcome to Nobelium Stores
+                            </h1>
+                            <p className="display-6 text-muted">Home of diverse products</p>
+                            <button id="button1" className="px-2">Make a purchase</button>
                         </div>
-                        <div className="carousel-item">
-                            <img src={duck2} alt="" id="img2" className="d-block w-100" />
-                        </div>
-                        <div className="carousel-item">
-                            <img src={duck3} alt="" id="img2" className="d-block w-100" />
+                        <div id="sibdiv1">
+                            <img src={duck} id="image1" alt="fruits" />
                         </div>
                     </div>
-                </div>
 
+                </div>
+                <main className={"container w-100"} style={{ display: "flex", flexWrap: "wrap" }} id={"wole1"}>
+                    {display.map((i, wole) => (
+                        <div key={wole} className="card card-body m-3 bg bg-dark text-light" style={{ width: "40%", height: "430px" }}>
+                            <img src={i.products} alt="" style={{ width: "100%", height: "60%" }} />
+                            <p>Name: {i.productName}</p>
+                            <p>Description: {i.description}</p>
+                            <p>Price: {i.price}</p>
+                            <Link className="btn btn-primary w-50" to="/signup">Buy</Link>
+                        </div>
+                    )
+                    )}
+                </main>
             </div>
-            <main className={""} style={{display: "flex", flexWrap: "wrap" }} id={"wole1"}>
-                {display.map((i, wole) => (
-                    <div key={wole} className="card card-body m-3 shadow bg-dark text-light" style={{ width: "200px" }}>
-                        <img src={i.products} alt="" style={{width:"200px", height:"100px"}} />
-                        <p>Description: {i.description}</p>
-                        <p>Price: {i.price}</p>
-                        <Link className="btn btn-primary w-50" to="/signup">Buy</Link>
-                    </div>
-                )
-                )}
-            </main>
         </>
     )
 }

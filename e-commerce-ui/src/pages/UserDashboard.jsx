@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { Toc } from "@mui/icons-material"
 import { ShoppingCart } from "@mui/icons-material"
+import Sidenav2 from "./SideNav2"
 const UserDashboard = () => {
     const navigate = useNavigate()
     const [name, setName] = useState("")
@@ -42,7 +43,7 @@ const UserDashboard = () => {
                         "Accept": "application/json",
                     }
                 }).then((response) => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     if (response.data.message == "verification successful") {
 
                     }
@@ -72,9 +73,9 @@ const UserDashboard = () => {
 
             let subTotal = Number(price) * Number(quantity)
             let newCart = { productName, price, description, p_id, pImg, quantity, subTotal, email }
-            console.log(newCart, subTotal);
+            // console.log(newCart, subTotal);
             axios.post(url3, newCart).then((res) => {
-                console.log(res);
+                // console.log(res);
             })
             alert("Added to cart")
             navigate('/dashboard')
@@ -83,12 +84,30 @@ const UserDashboard = () => {
     }
 
 
+     const logOut = () => {
+        navigate('/')
+        var reply = window.confirm("Warning:: You are going to be logged out!")
+        if (localStorage.token && reply == true) {
+            // window.location.reload()
+            localStorage.removeItem('token')
+            alert("Logged out successfully")
+        }
+        else if (localStorage.getItem("token") === null) {
+            alert("You are not logged in.")
+        }
 
+        else {
+            alert("Thank you for staying back.")
+        }
+
+    }
 
 
     return (
         <>
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+        <div id="main">
+            <Sidenav2 />
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark" id="mainnav">
                 <div className="container-fluid">
                     <a className="navbar-brand text-light mb-2" href="#">Nobelium store</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,17 +126,17 @@ const UserDashboard = () => {
                                 <Link to="/cart"><ShoppingCart className="text-white" /></Link>
                             </li>
                             <li className="nav-item text-white">
-                                <Link className="nav-link" to={"/"}>Log Out</Link>
+                                <a onClick={logOut}>Log Out</a>
                             </li>
                         </ul>
 
                     </div>
                 </div>
             </nav>
-            <main className={"container-fluid"} style={{ width: "100%", display: "flex", flexWrap: "wrap" }} id={"wole1"}>
+            <main className={"container"} style={{marginTop:"70px", width: "100%", display: "flex", flexWrap: "wrap" }} id={"wole1"}>
                 {display.map((product, wole) => (
-                    <div key={wole} className="card card-body m-3 shadow bg-dark text-light" style={{ width: "200px", minWidth: "" }}>
-                        <img src={product.products} alt="" style={{ width: "200px", height: "100px" }} />
+                    <div key={wole} className="card card-body m-3 bg bg-dark text-light" style={{ width: "40%", height: "530px" }}>
+                        <img src={product.products} alt="" style={{ width: "100%", height: "60%" }}/>
                         <p>Name:{product.productName}</p>
                         <p>Description: {product.description}</p>
                         <p>Price: {product.price}</p>
@@ -134,11 +153,12 @@ const UserDashboard = () => {
                             </div>
                         </div>
 
-
+ 
                     </div>
                 )
                 )}
             </main>
+        </div>
         </>
     )
 }
