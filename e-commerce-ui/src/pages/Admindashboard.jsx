@@ -103,7 +103,11 @@ const Admindashboard = () => {
     return (
         <>
             <div id="main">
-                <Sidenav3 />
+                <div className="d-flex w-100 justify-content-between align-items-center px-3 shadow-lg py-3" id="nameDiv">
+                    <Sidenav3 />
+                    <p className="display-6">Welcome, {name.firstname}</p>
+                    <p className="display-6">Nobelium Stores</p>
+                </div>
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark" id="mainnav">
                     <div className="container-fluid">
                         <a className="navbar-brand text-light mb-2" href="#">Nobelium store admin page</a>

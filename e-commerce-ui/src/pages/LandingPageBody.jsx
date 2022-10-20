@@ -12,18 +12,21 @@ const LandingPageBody = () => {
     const [display, setdisplay] = useState([])
     useEffect(() => {
         axios.get(url2).then((res) => {
-            console.log(res);
-            console.log(res.data)
+            // console.log(res);
+            // console.log(res.data)
             let result = res
-            console.log(result.data)
+            // console.log(result.data)
             setdisplay(result.data)
-            console.log(display);
+            // console.log(display);
         })
     }, [])
     return (
         <>
             <div id="main">
-                <Sidenav/>
+            <div className="d-flex w-100 justify-content-between align-items-center px-3 shadow-lg py-3" id="nameDiv">
+                    <Sidenav/>
+                    <p className="display-6">Nobelium Stores</p>
+                </div>
                 <div id="div4" className="">
                     <div className="w-100 bg bg-dark" id="div2">
                         <div id="subdiv1">

@@ -21,7 +21,7 @@ const SignIn = () => {
         onSubmit: (values) => {
             const logIn = values
             axios.post(url, logIn).then((res) => {
-                console.log(res);
+                // console.log(res);
                 setstatus(res.data.status)
                 setmessage(res.data.message)
                 setUserResult(res.data.result)

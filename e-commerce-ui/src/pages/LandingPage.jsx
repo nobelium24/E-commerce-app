@@ -16,7 +16,7 @@ const LandingPage = () => {
                         "Accept": "application/json",
                     }
                 }).then((response) => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     if (response.data.message == "verification successful") {
                         navigate('/dashboard')
                     }
@@ -32,7 +32,7 @@ const LandingPage = () => {
         <>
             <nav className="navbar navbar-expand-md navbar-light" id="mainnav">
                 <div className="container-fluid">
-                    <a className="navbar-brand mb-2 display-4 text-muted" href="#">Nobelium store</a>
+                    <a className="navbar-brand mb-2 display-4" href="#">Nobelium store</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

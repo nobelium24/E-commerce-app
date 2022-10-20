@@ -35,8 +35,9 @@ const Cart = () => {
     let sub
     const deleteProducts = (i) => {
         axios.post(url2, i).then((res) => {
-            // console.log(res);
+            console.log(res);
         })
+        // navigate("/cart")
         window.location.reload()
     }
     const something = JSON.parse(localStorage.userDetails)
@@ -63,7 +64,7 @@ const Cart = () => {
     };
     const handlePaystackCloseAction = () => {
         // implementation for  whatever you want to do when the Paystack dialog closed.
-        console.log('closed')
+        // console.log('closed')
     }
 
     const componentProps = {

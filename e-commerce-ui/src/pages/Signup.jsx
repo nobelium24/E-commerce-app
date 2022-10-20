@@ -23,7 +23,7 @@ const SignUp = () => {
             // console.log(values);
             const newUser = values
             axios.post(url, newUser).then((res)=>{
-                console.log(res);
+                // console.log(res);
                 setmessage(res.data.message)
                 setstatus(res.data.status)
                 if (res.data.status) {

@@ -4,6 +4,7 @@ import axios from "axios"
 import { Toc } from "@mui/icons-material"
 import { ShoppingCart } from "@mui/icons-material"
 import Sidenav2 from "./SideNav2"
+import { border } from "@mui/system"
 const UserDashboard = () => {
     const navigate = useNavigate()
     const [name, setName] = useState("")
@@ -84,7 +85,7 @@ const UserDashboard = () => {
     }
 
 
-     const logOut = () => {
+    const logOut = () => {
         navigate('/')
         var reply = window.confirm("Warning:: You are going to be logged out!")
         if (localStorage.token && reply == true) {
@@ -105,60 +106,64 @@ const UserDashboard = () => {
 
     return (
         <>
-        <div id="main">
-            <Sidenav2 />
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark" id="mainnav">
-                <div className="container-fluid">
-                    <a className="navbar-brand text-light mb-2" href="#">Nobelium store</a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse w-75" id="navbarSupportedContent">
-                        <form className="d-flex" style={{ width: "60%" }} id="navForm">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                        <ul className="navbar-nav d-flex align-items-center justify-content-around w-25 me-auto mb-2 mb-lg-0" id="listNav">
-                            <li className="nav-item text-white">
-                                <a className="nav-link">Welcome {name.firstname}</a>
-                            </li>
-                            <li>
-                                <Link to="/cart"><ShoppingCart className="text-white" /></Link>
-                            </li>
-                            <li className="nav-item text-white">
-                                <a onClick={logOut}>Log Out</a>
-                            </li>
-                        </ul>
-
-                    </div>
+            <div id="main">
+                <div className="d-flex w-100 justify-content-between align-items-center px-3 shadow-lg py-3" id="nameDiv">
+                    <Sidenav2 />
+                    <p className="display-6">Welcome, {name.firstname}</p>
+                    <p className="display-6">Nobelium Stores</p>
                 </div>
-            </nav>
-            <main className={"container"} style={{marginTop:"70px", width: "100%", display: "flex", flexWrap: "wrap" }} id={"wole1"}>
-                {display.map((product, wole) => (
-                    <div key={wole} className="card card-body m-3 bg bg-dark text-light" style={{ width: "40%", height: "530px" }}>
-                        <img src={product.products} alt="" style={{ width: "100%", height: "60%" }}/>
-                        <p>Name:{product.productName}</p>
-                        <p>Description: {product.description}</p>
-                        <p>Price: {product.price}</p>
-                        {/* <p>Sub-total: {product.price*quantity}</p> */}
-                        <div className="w-100">
-                            <p>Quantity</p>
-                            <div className="w-100 d-flex">
-                                <input type="number"
-                                    className="form-control w-25 mx-2"
-                                    onChange={(e) => setQuantity(e.target.value)}
-                                />
-                                {/* <button className="btn btn-primary w-50" onClick={() => setToCart(i)}>Buy</button> */}
-                                <button className="btn btn-primary w-50" onClick={() => getCart(product)}>Buy</button>
-                            </div>
-                        </div>
+                <nav className="navbar navbar-expand-md navbar-dark bg-dark" id="mainnav">
+                    <div className="container-fluid">
+                        <a className="navbar-brand text-light mb-2" href="#">Nobelium store</a>
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                        <div className="collapse navbar-collapse w-75" id="navbarSupportedContent">
+                            <form className="d-flex" style={{ width: "60%" }} id="navForm">
+                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                                <button className="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                            <ul className="navbar-nav d-flex align-items-center justify-content-around w-25 me-auto mb-2 mb-lg-0" id="listNav">
+                                <li className="nav-item text-white">
+                                    <a className="nav-link">Welcome {name.firstname}</a>
+                                </li>
+                                <li>
+                                    <Link to="/cart"><ShoppingCart className="text-white" /></Link>
+                                </li>
+                                <li className="nav-item text-white">
+                                    <a onClick={logOut}>Log Out</a>
+                                </li>
+                            </ul>
 
- 
+                        </div>
                     </div>
-                )
-                )}
-            </main>
-        </div>
+                </nav>
+                <main className={"container"} style={{ marginTop: "70px", width: "100%", display: "flex", flexWrap: "wrap" }} id={"wole1"}>
+                    {display.map((product, wole) => (
+                        <div key={wole} className="card card-body m-3 bg bg-dark text-light" style={{ width: "40%", height: "530px" }}>
+                            <img src={product.products} alt="" style={{ width: "100%", height: "60%" }} />
+                            <p>Name:{product.productName}</p>
+                            <p>Description: {product.description}</p>
+                            <p>Price: {product.price}</p>
+                            {/* <p>Sub-total: {product.price*quantity}</p> */}
+                            <div className="w-100">
+                                <p>Quantity</p>
+                                <div className="w-100 d-flex">
+                                    <input type="number"
+                                        className="form-control w-25 mx-2"
+                                        onChange={(e) => setQuantity(e.target.value)}
+                                    />
+                                    {/* <button className="btn btn-primary w-50" onClick={() => setToCart(i)}>Buy</button> */}
+                                    <button className="btn btn-primary w-50" onClick={() => getCart(product)}>Buy</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    )
+                    )}
+                </main>
+            </div>
         </>
     )
 }
